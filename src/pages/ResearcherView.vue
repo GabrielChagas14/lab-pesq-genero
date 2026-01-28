@@ -56,7 +56,7 @@ const educations = ref([
                         </IftaLabel>
                     </div>
                     <div class="flex justify-end">
-                        <Button label="Salvar" />
+                        <Button as="router-link" to="/ResearcherList" label="Salvar" />
                     </div>
                 </form>
             </template>

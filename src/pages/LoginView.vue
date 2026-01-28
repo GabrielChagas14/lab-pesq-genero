@@ -23,7 +23,7 @@ import IftaLabel from 'primevue/iftalabel';
                         <Password inputId="password" v-model="value" toggleMask :feedback="false" />
                         <label for="password">Password</label>
                     </IftaLabel>
-                    <Button label="Entrar" />
+                    <Button as="router-link" to="/ResearcherList" label="Entrar" />
                 </form>
             </template>
         </Card>

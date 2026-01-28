@@ -39,8 +39,8 @@ const items = ref([
      {
         label: 'Pesquisas',
         items: [
-            { label: 'Memorial', icon: 'pi pi-building-columns', route: '/' },
-            { label: 'Dados Feminicídio', icon: 'pi pi-server', route: '/' },
+            { label: 'Memorial', icon: 'pi pi-building-columns', route: '/Timeline' },
+            { label: 'Dados Feminicídio', icon: 'pi pi-server', route: '/FemicideData' },
         ]
     },
      {
