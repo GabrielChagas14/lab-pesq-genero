@@ -1,10 +1,12 @@
 <script setup>
 import SideBar from './components/SideBarComponent.vue';
+import TopBar from './components/TopBarComponent.vue'
 </script>
 
 <template>
+    <TopBar/>
     <div class="flex flex-row box-border p-6 h-screen">
-        <SideBar v-if="!$route.meta?.hideSidebar" />
+        
         <router-view />
     </div>
 </template>
