@@ -5,7 +5,7 @@ import TopBar from './components/TopBarComponent.vue'
 
 <template>
     <TopBar/>
-    <div class="flex flex-row box-border p-6 h-screen">
+    <div class="flex flex-row box-border p-6 min-h-screen">
         
         <router-view />
     </div>

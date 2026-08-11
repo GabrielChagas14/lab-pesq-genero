@@ -51,32 +51,21 @@
 
 <script setup>
 defineProps({
-    /**
-     * Se `true`, exibe a topbar no modo transparente (fundo colorido).
-     * Se `false`, exibe no modo solido (fundo branco com borda).
-     */
     transparent: {
         type: Boolean,
         default: false,
     },
-    /**
-     * Cor de fundo usada no modo transparente.
-     * Aceita qualquer valor CSS valido (hex, rgb, var(...), etc.).
-     */
     bgColor: {
         type: String,
         default: '#8b3d97',
     },
-    /**
-     * Lista de itens de navegacao. Cada item deve ter `label` e `route`.
-     */
     navItems: {
         type: Array,
         default: () => [
             { label: 'Inicio',   route: '/'        },
             { label: 'Memorial', route: '/Timeline' },
             { label: 'Atlas',    route: '/Atlas'    },
-            { label: 'Artigos',  route: '/Artigos'  },
+            { label: 'Publicações',  route: '/publicacoes'  },
         ],
     },
 });

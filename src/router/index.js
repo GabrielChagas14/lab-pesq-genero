@@ -1,22 +1,14 @@
 import { createRouter, createWebHistory } from 'vue-router';
+import PublicacoesPage from '../pages/PublicacoesPage.vue';
 
-import LoginView from '../pages/LoginView.vue';
-import ResearcherView from '../pages/ResearcherView.vue';
-import ResearcherListView from '../pages/ResearcherListView.vue';
-import FemicideDataView from '../pages/FemicideDataView.vue';
-import VictimTimelineView from '../pages/VictimTimelineView.vue';
 /* import HomePage from '../pages/HomePage.vue';
 import DashboardPage from '../pages/DashboardPage.vue';
 import VictimTimelinePage from '../pages/VictimTimelinePage.vue'; */
 
 const routes = [
   // { path: '/', component: HomePage },
-  { path: '/login', name: 'login', component: LoginView, meta: { hideSidebar: true } },
-  { path: '/Researcher', name: 'Researcher', component: ResearcherView },
-  { path: '/ResearcherList', name: 'ResearcherList', component: ResearcherListView },
-  { path: '/FemicideData', name: 'FemicideData', component: FemicideDataView },
-  { path: '/Timeline',  name: 'Timeline', component: VictimTimelineView },
-/*   { path: '/dashboard', component: DashboardPage },*/
+  /* { path: '/dashboard', component: DashboardPage }, */
+  { path: '/publicacoes', component: PublicacoesPage },
 ];
 
 export default createRouter({
