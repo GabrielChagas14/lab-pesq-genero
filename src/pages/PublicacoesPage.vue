@@ -1,18 +1,54 @@
 <template>
-    <div class="flex flex-col gap-2 w-full">
+    <!-- ══════════════════════════════════════════════════════
+         Hero Section
+         ──────────────────────────────────────────────────────
+         Começa em y=0 (atrás do TopBar fixed).
+         O TopBar é transparente sobre o hero e muda para sólido
+         quando o hero sai da viewport (detectado pelo IntersectionObserver).
+    ══════════════════════════════════════════════════════ -->
+    <div ref="heroRef" class="relative w-full bg-[#380252] overflow-hidden">
 
-        <!-- ── Cabeçalho ──────────────────────────────────────── -->
-        <div class="flex-shrink-0">
-            <h1 class="font-display text-3xl text-[#380252] leading-tight">Publicações</h1>
-            <p class="font-sans text-sm text-gray-500 mt-1">
+        <!-- Overlay de profundidade (gradiente radial sutil) -->
+        <div
+            class="absolute inset-0 pointer-events-none"
+            style="background: radial-gradient(ellipse at 65% 40%, rgba(79,10,112,0.55) 0%, transparent 65%)"
+        />
+
+        <!-- Conteúdo: pt-14 para ficar abaixo do TopBar fixed -->
+        <div class="relative z-10 text-center px-6 pt-24 pb-20">
+            <h1 class="font-display text-5xl sm:text-6xl font-bold text-white leading-tight drop-shadow-sm">
+                Publicações
+            </h1>
+            <p class="mt-4 font-sans text-base text-white/70 max-w-lg mx-auto leading-relaxed">
                 Explore publicações relacionadas a violência de gênero publicadas ou divulgadas pelo laboratório de pesquisa.
             </p>
         </div>
 
+        <!-- Wave SVG — transição suave do hero para o fundo da página (#f0f0f0) -->
+        <div class="leading-[0]">
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 1440 72"
+                preserveAspectRatio="none"
+                class="w-full h-[72px] block"
+                aria-hidden="true"
+            >
+                <path
+                    d="M0,36 C240,72 480,0 720,36 C960,72 1200,0 1440,36 L1440,72 L0,72 Z"
+                    fill="#f0f0f0"
+                />
+            </svg>
+        </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════
+         Conteúdo — Filtros + Grid
+    ══════════════════════════════════════════════════════ -->
+    <div class="flex flex-col gap-3 px-6 py-4">
+
         <!-- ── Filtros & Busca ────────────────────────────────── -->
-        <div
-            class="flex-shrink-0 flex flex-col sm:flex-row gap-3 py-4 border-b border-gray-200"
-        >
+        <div class="flex flex-col sm:flex-row gap-3 py-2 border-b border-gray-200">
+
             <!-- Busca -->
             <div class="relative flex-1">
                 <i class="pi pi-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm pointer-events-none" />
@@ -48,12 +84,13 @@
             </div>
         </div>
 
-        <!-- ── Contagem de resultados ──────────────────────────── -->
-        <div class="flex-shrink-0 flex items-center justify-between">
+        <!-- ── Contagem + Ordenação ────────────────────────────── -->
+        <div class="flex items-center justify-between">
             <p class="font-sans text-xs text-gray-500">
-                {{ publicacoesFiltradas.length }} publicaç{{ publicacoesFiltradas.length === 1 ? 'ão' : 'ões' }} encontrada{{ publicacoesFiltradas.length === 1 ? '' : 's' }}
+                {{ publicacoesFiltradas.length }}
+                publicaç{{ publicacoesFiltradas.length === 1 ? 'ão' : 'ões' }}
+                encontrada{{ publicacoesFiltradas.length === 1 ? '' : 's' }}
             </p>
-            <!-- Ordenação -->
             <select
                 v-model="sortBy"
                 class="font-sans text-xs text-gray-600 border border-gray-200 rounded-lg px-3 py-1.5 bg-white
@@ -68,7 +105,6 @@
 
         <!-- ── Grid de Cards ──────────────────────────────────── -->
         <div>
-
             <!-- Estado vazio -->
             <div
                 v-if="publicacoesFiltradas.length === 0"
@@ -101,15 +137,46 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
+import { ref, computed, onMounted, onUnmounted } from 'vue';
 import PublicacaoCard from '@/components/PublicacaoCard.vue';
+import { usePageHero } from '@/composables/usePageHero.js';
+
+// ── Hero scroll detection ──────────────────────────────────────────────────
+const heroRef        = ref(null);
+const { setHero }    = usePageHero();
+let   heroObserver   = null;
+
+onMounted(() => {
+    // Ativa o TopBar transparente imediatamente ao entrar na página
+    setHero(true, '#380252');
+
+    // IntersectionObserver com rootMargin negativo igual à altura do TopBar (h-14 = 56px).
+    // Assim o hero é considerado "fora" quando a parte visível (abaixo do TopBar) sai da tela.
+    heroObserver = new IntersectionObserver(
+        ([entry]) => {
+            setHero(entry.isIntersecting, '#380252');
+        },
+        {
+            threshold:  0,
+            rootMargin: '-56px 0px 0px 0px',
+        }
+    );
+
+    if (heroRef.value) heroObserver.observe(heroRef.value);
+});
+
+onUnmounted(() => {
+    heroObserver?.disconnect();
+    // Garante que o TopBar volta ao sólido ao sair da página
+    setHero(false);
+});
 
 // ── Tipos disponíveis ──────────────────────────────────────────────────────
 const tipos = [
-    { value: 'texto',   label: 'Texto',   icon: 'pi pi-file-edit' },
-    { value: 'link',    label: 'Link',    icon: 'pi pi-link'      },
-    { value: 'pdf',     label: 'PDF',     icon: 'pi pi-file-pdf'  },
-    { value: 'video',   label: 'Vídeo',   icon: 'pi pi-video'     },
+    { value: 'texto',   label: 'Texto',   icon: 'pi pi-file-edit'  },
+    { value: 'link',    label: 'Link',    icon: 'pi pi-link'       },
+    { value: 'pdf',     label: 'PDF',     icon: 'pi pi-file-pdf'   },
+    { value: 'video',   label: 'Vídeo',   icon: 'pi pi-video'      },
     { value: 'podcast', label: 'Podcast', icon: 'pi pi-headphones' },
 ];
 
@@ -245,24 +312,21 @@ const publicacoes = ref([
 const publicacoesFiltradas = computed(() => {
     let lista = [...publicacoes.value];
 
-    // Busca por título, resumo ou pesquisador
     if (searchQuery.value.trim()) {
         const q = searchQuery.value.toLowerCase();
         lista = lista.filter(
             (p) =>
-                p.titulo.toLowerCase().includes(q) ||
-                p.resumo.toLowerCase().includes(q) ||
-                p.pesquisador.toLowerCase().includes(q) ||
+                p.titulo.toLowerCase().includes(q)       ||
+                p.resumo.toLowerCase().includes(q)       ||
+                p.pesquisador.toLowerCase().includes(q)  ||
                 p.categoria.toLowerCase().includes(q)
         );
     }
 
-    // Filtro por tipo
     if (selectedTipos.value.length > 0) {
         lista = lista.filter((p) => selectedTipos.value.includes(p.tipo));
     }
 
-    // Ordenação
     if (sortBy.value === 'data_desc') {
         lista.sort((a, b) => new Date(b.data_publicacao) - new Date(a.data_publicacao));
     } else if (sortBy.value === 'data_asc') {

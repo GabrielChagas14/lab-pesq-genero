@@ -3,6 +3,7 @@
     <!-- Modo solido: fundo branco com borda e sombra sutil -->
     <nav
         :class="[
+            'fixed top-0 left-0 right-0 z-50',
             'w-full flex items-center justify-center px-6 h-14 transition-all duration-300',
             transparent
                 ? ''
