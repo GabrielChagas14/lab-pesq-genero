@@ -129,6 +129,7 @@
                     v-for="pub in publicacoesFiltradas"
                     :key="pub.id"
                     :publicacao="pub"
+                    @click="abrirPublicacao(pub)"
                 />
             </div>
         </div>
@@ -138,8 +139,10 @@
 
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from 'vue';
-import PublicacaoCard from '@/components/PublicacaoCard.vue';
-import { usePageHero } from '@/composables/usePageHero.js';
+import { useRouter }       from 'vue-router';
+import PublicacaoCard      from '@/components/PublicacaoCard.vue';
+import { usePageHero }     from '@/composables/usePageHero.js';
+import { publicacoesMock } from '@/data/publicacoes.js';
 
 // ── Hero scroll detection ──────────────────────────────────────────────────
 const heroRef        = ref(null);
@@ -147,29 +150,24 @@ const { setHero }    = usePageHero();
 let   heroObserver   = null;
 
 onMounted(() => {
-    // Ativa o TopBar transparente imediatamente ao entrar na página
     setHero(true, '#380252');
-
-    // IntersectionObserver com rootMargin negativo igual à altura do TopBar (h-14 = 56px).
-    // Assim o hero é considerado "fora" quando a parte visível (abaixo do TopBar) sai da tela.
     heroObserver = new IntersectionObserver(
-        ([entry]) => {
-            setHero(entry.isIntersecting, '#380252');
-        },
-        {
-            threshold:  0,
-            rootMargin: '-56px 0px 0px 0px',
-        }
+        ([entry]) => setHero(entry.isIntersecting, '#380252'),
+        { threshold: 0, rootMargin: '-56px 0px 0px 0px' }
     );
-
     if (heroRef.value) heroObserver.observe(heroRef.value);
 });
 
 onUnmounted(() => {
     heroObserver?.disconnect();
-    // Garante que o TopBar volta ao sólido ao sair da página
     setHero(false);
 });
+
+// ── Navegação para detalhe ─────────────────────────────────────────────────
+const router = useRouter();
+function abrirPublicacao(pub) {
+    router.push(`/publicacoes/${pub.id}`);
+}
 
 // ── Tipos disponíveis ──────────────────────────────────────────────────────
 const tipos = [
@@ -196,119 +194,11 @@ function limparFiltros() {
     selectedTipos.value = [];
 }
 
-// ── Dados mockados ─────────────────────────────────────────────────────────
-const publicacoes = ref([
-    {
-        id: 1,
-        pesquisador: 'Dra. Ana Luísa Ferreira',
-        titulo: 'Gênero e poder nas narrativas jornalísticas brasileiras',
-        tipo: 'texto',
-        resumo: 'Uma análise crítica sobre como as vozes femininas são silenciadas na cobertura política dos principais veículos de comunicação do país.',
-        data_publicacao: '2025-03-15',
-        categoria: 'Comunicação',
-    },
-    {
-        id: 2,
-        pesquisador: 'Prof. Carlos Mendes',
-        titulo: 'Violência de gênero: mapeamento regional 2024',
-        tipo: 'pdf',
-        resumo: 'Relatório com dados regionais sobre violência doméstica e de gênero, cruzando indicadores socioeconômicos e acesso à justiça.',
-        data_publicacao: '2025-06-01',
-        categoria: 'Dados & Estatísticas',
-    },
-    {
-        id: 3,
-        pesquisador: 'Ma. Beatriz Oliveira',
-        titulo: 'Feminismo interseccional: conceitos e práticas',
-        tipo: 'video',
-        resumo: 'Palestra gravada no Simpósio Ibero-Americano de Estudos de Gênero, abordando as interseções entre raça, classe e gênero.',
-        data_publicacao: '2025-04-20',
-        categoria: 'Teoria Feminista',
-    },
-    {
-        id: 4,
-        pesquisador: 'Dra. Renata Souza',
-        titulo: 'Podcast: Mulheres na Ciência',
-        tipo: 'podcast',
-        resumo: 'Série de episódios com pesquisadoras que narram suas trajetórias no ambiente acadêmico e os desafios enfrentados.',
-        data_publicacao: '2025-07-10',
-        categoria: 'Ciência & Tecnologia',
-    },
-    {
-        id: 5,
-        pesquisador: 'Prof. João Araujo',
-        titulo: 'Base de dados: ocorrências por bairro – SP',
-        tipo: 'link',
-        resumo: 'Link para o repositório público com dados georreferenciados de ocorrências de violência de gênero na cidade de São Paulo.',
-        data_publicacao: '2025-05-05',
-        categoria: 'Dados & Estatísticas',
-    },
-    {
-        id: 6,
-        pesquisador: 'Ma. Fernanda Lima',
-        titulo: 'Representatividade LGBTQIA+ nas universidades federais',
-        tipo: 'texto',
-        resumo: 'Estudo quantiqualitativo sobre as políticas de inclusão e os desafios enfrentados por estudantes LGBTQIA+ nas IFEs.',
-        data_publicacao: '2025-02-28',
-        categoria: 'Diversidade',
-    },
-    {
-        id: 7,
-        pesquisador: 'Dra. Camila Pereira',
-        titulo: 'O mercado de trabalho e as desigualdades de gênero',
-        tipo: 'pdf',
-        resumo: 'Análise dos dados do IBGE sobre disparidades salariais e segregação ocupacional por gênero no Brasil de 2010 a 2024.',
-        data_publicacao: '2025-01-18',
-        categoria: 'Economia',
-    },
-    {
-        id: 8,
-        pesquisador: 'Prof. Marcos Ribeiro',
-        titulo: 'Documentário: Vozes do Sertão',
-        tipo: 'video',
-        resumo: 'Curta-metragem que documenta a resistência de mulheres agricultoras no semiárido nordestino diante das mudanças climáticas.',
-        data_publicacao: '2025-08-01',
-        categoria: 'Cultura',
-    },
-    {
-        id: 9,
-        pesquisador: 'Ma. Juliana Costa',
-        titulo: 'Episódio 12 – Saúde mental e gênero',
-        tipo: 'podcast',
-        resumo: 'Debate com psicólogas e ativistas sobre os impactos da cultura do patriarcado na saúde mental de mulheres e pessoas não-binárias.',
-        data_publicacao: '2025-07-25',
-        categoria: 'Saúde',
-    },
-    {
-        id: 10,
-        pesquisador: 'Dra. Patrícia Alves',
-        titulo: 'Direitos reprodutivos na América Latina',
-        tipo: 'texto',
-        resumo: 'Revisão bibliográfica comparativa sobre as legislações e disputas em torno dos direitos reprodutivos nos países latino-americanos.',
-        data_publicacao: '2025-06-30',
-        categoria: 'Direito',
-    },
-    {
-        id: 11,
-        pesquisador: 'Ma. Larissa Nunes',
-        titulo: 'Cartografia da violência obstétrica no Brasil',
-        tipo: 'link',
-        resumo: 'Portal interativo que agrega relatos, estudos e legislação sobre violência obstétrica, com filtros por estado e ano.',
-        data_publicacao: '2025-03-03',
-        categoria: 'Saúde',
-    },
-    {
-        id: 12,
-        pesquisador: 'Prof. Rodrigo Matos',
-        titulo: 'Masculinidades e crise do patriarcado',
-        tipo: 'texto',
-        resumo: 'Ensaio teórico que examina como as transformações sociais contemporâneas afetam as construções identitárias masculinas.',
-        data_publicacao: '2025-04-11',
-        categoria: 'Teoria Feminista',
-    },
-]);
+// ── Dados mockados (importados do arquivo compartilhado) ──────────────────
+const publicacoes = ref(publicacoesMock);
 
 // ── Filtragem e ordenação ──────────────────────────────────────────────────
+
 const publicacoesFiltradas = computed(() => {
     let lista = [...publicacoes.value];
 

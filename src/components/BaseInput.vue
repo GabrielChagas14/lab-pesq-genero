@@ -5,6 +5,7 @@
         Props
         ──────────────────────────────────────────────────────
         type     : 'text' | 'textarea' | 'select'
+        inputType: String  – tipo do input HTML (default: 'text'). Ex: 'password', 'email', 'date'
         v-model  : valor reativo (string ou qualquer)
         label    : String  – rótulo acima do campo
         placeholder : String
@@ -39,6 +40,7 @@
         <InputText
             v-if="type === 'text'"
             :id="inputId"
+            :type="inputType"
             :modelValue="modelValue"
             @update:modelValue="$emit('update:modelValue', $event)"
             :placeholder="placeholder"
@@ -129,6 +131,11 @@ const props = defineProps({
         type: String,
         default: 'text',
         validator: (v) => ['text', 'textarea', 'select'].includes(v),
+    },
+    /** Tipo HTML do input — usado somente quando type='text'. Ex: 'password', 'email', 'date' */
+    inputType: {
+        type: String,
+        default: 'text',
     },
     modelValue: {
         type: [String, Number, Object, null],
