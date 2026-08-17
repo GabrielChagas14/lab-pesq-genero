@@ -103,8 +103,8 @@ defineProps({
         type: Array,
         default: () => [
             { label: 'Inicio',      route: '/'            },
-            { label: 'Memorial',    route: '/Timeline'     },
-            { label: 'Atlas',       route: '/Atlas'        },
+            { label: 'Memorial',    route: '/memorial'    },
+            { label: 'Dados',       route: '/dados'        },
             { label: 'Publicações', route: '/publicacoes'  },
         ],
     },

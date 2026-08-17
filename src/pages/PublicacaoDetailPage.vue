@@ -1,10 +1,6 @@
 <template>
-    <!-- ══════════════════════════════════════════════════════
-         Hero — mesmo padrão da listagem, adaptado ao tipo
-    ══════════════════════════════════════════════════════ -->
     <div ref="heroRef" class="relative w-full bg-[#380252] overflow-hidden">
 
-        <!-- Overlay de profundidade -->
         <div
             class="absolute inset-0 pointer-events-none"
             style="background: radial-gradient(ellipse at 65% 40%, rgba(79,10,112,0.55) 0%, transparent 65%)"
@@ -12,7 +8,6 @@
 
         <div class="relative z-10 px-6 pt-24 pb-20">
 
-            <!-- Breadcrumb -->
             <div class="flex items-center justify-center gap-2 mb-6 text-white/50 text-xs font-sans">
                 <router-link
                     to="/publicacoes"
@@ -25,10 +20,8 @@
                 <span class="text-white/40 truncate max-w-xs">{{ pub?.titulo }}</span>
             </div>
 
-            <!-- Conteúdo centralizado -->
             <div class="text-center max-w-3xl mx-auto">
 
-                <!-- Badge de tipo -->
                 <span
                     :class="[
                         'inline-flex items-center gap-1.5 px-3 py-1 rounded-full',
@@ -40,12 +33,10 @@
                     {{ tipoMeta.label }}
                 </span>
 
-                <!-- Título -->
                 <h1 class="font-display text-4xl sm:text-5xl font-bold text-white leading-tight drop-shadow-sm mt-2">
                     {{ pub?.titulo }}
                 </h1>
 
-                <!-- Pesquisador -->
                 <div class="flex items-center justify-center gap-2 mt-4">
                     <div class="w-7 h-7 rounded-full bg-white/15 flex items-center justify-center">
                         <i class="pi pi-user text-white text-xs" />
@@ -53,7 +44,6 @@
                     <span class="font-sans text-sm text-white/80 font-medium">{{ pub?.pesquisador }}</span>
                 </div>
 
-                <!-- Meta: data · categoria -->
                 <div class="flex items-center justify-center gap-3 mt-3 text-white/50 text-xs font-sans">
                     <span class="flex items-center gap-1">
                         <i class="pi pi-calendar text-[10px]" />
@@ -68,13 +58,12 @@
             </div>
         </div>
 
-        <!-- Wave SVG -->
-        <div class="leading-[0]">
+        <div class="leading-0">
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 1440 72"
                 preserveAspectRatio="none"
-                class="w-full h-[72px] block"
+                class="w-full h-18 block"
                 aria-hidden="true"
             >
                 <path d="M0,36 C240,72 480,0 720,36 C960,72 1200,0 1440,36 L1440,72 L0,72 Z" fill="#f0f0f0" />
@@ -82,9 +71,6 @@
         </div>
     </div>
 
-    <!-- ══════════════════════════════════════════════════════
-         404 — publicação não encontrada
-    ══════════════════════════════════════════════════════ -->
     <div
         v-if="!pub"
         class="flex flex-col items-center justify-center py-24 gap-4 text-center px-6"
@@ -99,16 +85,11 @@
         </router-link>
     </div>
 
-    <!-- ══════════════════════════════════════════════════════
-         Conteúdo principal
-    ══════════════════════════════════════════════════════ -->
     <div v-else class="max-w-6xl mx-auto px-6 py-8">
         <div class="flex gap-8 items-start">
 
-            <!-- ── Coluna esquerda: visual + metadados ─────── -->
             <aside class="w-64 shrink-0 flex flex-col gap-4 sticky top-20">
 
-                <!-- Visual do tipo -->
                 <div
                     :class="[
                         'relative flex items-center justify-center rounded-2xl overflow-hidden',
@@ -117,15 +98,13 @@
                     ]"
                 >
                     <i :class="[tipoMeta.icon, tipoMeta.iconColor, 'text-7xl opacity-30']" />
-                    <!-- Label do tipo no rodapé do visual -->
-                    <div class="absolute bottom-0 left-0 right-0 px-4 py-3 bg-gradient-to-t from-black/20">
+                    <div class="absolute bottom-0 left-0 right-0 px-4 py-3 bg-linear-to-t from-black/20">
                         <span :class="['text-[11px] font-semibold font-sans uppercase tracking-wider', tipoMeta.badgeText]">
                             {{ tipoMeta.label }}
                         </span>
                     </div>
                 </div>
 
-                <!-- Card de metadados -->
                 <div class="bg-white rounded-2xl shadow-sm p-5 flex flex-col gap-4">
 
                     <div>
@@ -154,7 +133,6 @@
 
                 </div>
 
-                <!-- Compartilhar -->
                 <div class="bg-white rounded-2xl shadow-sm p-5">
                     <p class="font-sans text-[10px] uppercase tracking-wider text-gray-400 mb-3">Compartilhar</p>
                     <div class="flex gap-2">
@@ -176,10 +154,8 @@
                 </div>
             </aside>
 
-            <!-- ── Coluna principal: resumo + conteúdo ─────── -->
             <main class="flex-1 min-w-0 flex flex-col gap-6 pb-12">
 
-                <!-- Resumo destacado -->
                 <div class="bg-white rounded-2xl shadow-sm overflow-hidden">
                     <div class="border-l-4 border-[#380252] p-6">
                         <div class="flex items-center gap-2 mb-3">
@@ -194,7 +170,6 @@
                     </div>
                 </div>
 
-                <!-- Conteúdo completo -->
                 <div class="bg-white rounded-2xl shadow-sm p-6">
                     <div class="flex items-center gap-2 mb-5 pb-4 border-b border-gray-100">
                         <i :class="[tipoMeta.icon, 'text-[#380252] text-sm']" />
@@ -219,7 +194,6 @@ import { useRoute }       from 'vue-router';
 import { usePageHero }    from '@/composables/usePageHero.js';
 import { publicacoesMock } from '@/data/publicacoes.js';
 
-// ── Hero scroll detection (mesmo padrão da listagem) ──────────────────────
 const heroRef     = ref(null);
 const { setHero } = usePageHero();
 let heroObserver  = null;
@@ -238,13 +212,11 @@ onUnmounted(() => {
     setHero(false);
 });
 
-// ── Publicação ─────────────────────────────────────────────────────────────
 const route = useRoute();
 const pub   = computed(() =>
     publicacoesMock.find((p) => p.id === Number(route.params.id)) ?? null
 );
 
-// ── Metadados visuais por tipo (mesmo mapa do PublicacaoCard) ──────────────
 const tipoMap = {
     texto: {
         label: 'Texto', icon: 'pi pi-file-edit',
@@ -291,7 +263,6 @@ const labelConteudo = computed(() => {
     return map[pub.value?.tipo] ?? 'Conteúdo';
 });
 
-// ── Copiar link ────────────────────────────────────────────────────────────
 const copied = ref(false);
 function copyLink() {
     navigator.clipboard.writeText(window.location.href).then(() => {
@@ -300,7 +271,6 @@ function copyLink() {
     });
 }
 
-// ── Formatação de data ─────────────────────────────────────────────────────
 function formatDate(dateStr) {
     if (!dateStr) return '';
     const [year, month, day] = dateStr.split('-');

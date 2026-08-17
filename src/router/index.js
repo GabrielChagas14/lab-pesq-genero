@@ -4,6 +4,7 @@ import { useAuth } from '../composables/useAuth.js';
 // Páginas públicas
 import PublicacoesPage      from '../pages/PublicacoesPage.vue';
 import PublicacaoDetailPage from '../pages/PublicacaoDetailPage.vue';
+import MemorialPage         from '../pages/MemorialPage.vue';
 
 // Autenticação
 import LoginPage            from '../pages/LoginPage.vue';
@@ -20,6 +21,7 @@ import VictimTimelinePage from '../pages/VictimTimelinePage.vue'; */
 const routes = [
     // ── Públicas ────────────────────────────────────────────
     // { path: '/', component: HomePage },
+    { path: '/memorial',        component: MemorialPage         },
     { path: '/publicacoes',     component: PublicacoesPage      },
     { path: '/publicacoes/:id', component: PublicacaoDetailPage },
 
