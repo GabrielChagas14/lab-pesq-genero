@@ -2,110 +2,126 @@
 
 /* ── Fontes locais ───────────────────────────────────────────────────── */
 @font-face {
-    font-family: 'Inter';
-    src: url('@/assets/fonts/Inter/Inter-VariableFont_opsz,wght.ttf') format('truetype');
-    font-weight: 100 900;
-    font-style: normal;
-    font-display: swap;
+   font-family: 'Inter';
+   src: url('@/assets/fonts/Inter/Inter-VariableFont_opsz,wght.ttf') format('truetype');
+   font-weight: 100 900;
+   font-style: normal;
+   font-display: swap;
 }
 
 @font-face {
-    font-family: 'Inter';
-    src: url('@/assets/fonts/Inter/Inter-Italic-VariableFont_opsz,wght.ttf') format('truetype');
-    font-weight: 100 900;
-    font-style: italic;
-    font-display: swap;
+   font-family: 'Inter';
+   src: url('@/assets/fonts/Inter/Inter-Italic-VariableFont_opsz,wght.ttf') format('truetype');
+   font-weight: 100 900;
+   font-style: italic;
+   font-display: swap;
 }
 
 @font-face {
-    font-family: 'Young Serif';
-    src: url('@/assets/fonts/Young_Serif/YoungSerif-Regular.ttf') format('truetype');
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
+   font-family: 'Young Serif';
+   src: url('@/assets/fonts/Young_Serif/YoungSerif-Regular.ttf') format('truetype');
+   font-weight: 400;
+   font-style: normal;
+   font-display: swap;
 }
 
 
 @theme {
-    /* ── Fontes ──────────────────────────────────────────────────────────
+   /* ── Fontes ──────────────────────────────────────────────────────────
        Uso: font-sans (Inter - primaria), font-display (Young Serif - destaque)
     ────────────────────────────────────────────────────────────────── */
-    --font-sans:    'Inter', sans-serif;
-    --font-display: 'Young Serif', serif;
+   --font-sans: 'Inter', sans-serif;
+   --font-display: 'Young Serif', serif;
 
 
-    /* ── Cores nomeadas (Cor 1-11) ───────────────────────────────────────
+   /* ── Cores nomeadas (Cor 1-11) ───────────────────────────────────────
        Uso: text-cor-1, bg-cor-2, border-cor-3 ...
     ────────────────────────────────────────────────────────────────── */
-    --color-cor-1:  #e2a2ff; /* lilas claro       */
-    --color-cor-2:  #8b3d97; /* roxo medio        */
-    --color-cor-3:  #380252; /* roxo escuro       */
-    --color-cor-4:  #02afb6; /* verde-azulado     */
-    --color-cor-5:  #7cd3ef; /* azul claro        */
-    --color-cor-6:  #f18a9e; /* rosa              */
-    --color-cor-7:  #ffe2a2; /* amarelo claro     */
-    --color-cor-8:  #E87E03; /* laranja           */
-    --color-cor-9:  #ee977c; /* salmao            */
-    --color-cor-10: #8af1aa; /* verde menta       */
-    --color-cor-11: #f18a9e; /* rosa (alias cor-6)*/
+   --color-cor-1: #e2a2ff;
+   /* lilas claro       */
+   --color-cor-2: #8b3d97;
+   /* roxo medio        */
+   --color-cor-3: #380252;
+   /* roxo escuro       */
+   --color-cor-4: #02afb6;
+   /* verde-azulado     */
+   --color-cor-5: #7cd3ef;
+   /* azul claro        */
+   --color-cor-6: #f18a9e;
+   /* rosa              */
+   --color-cor-7: #ffe2a2;
+   /* amarelo claro     */
+   --color-cor-8: #E87E03;
+   /* laranja           */
+   --color-cor-9: #ee977c;
+   /* salmao            */
+   --color-cor-10: #8af1aa;
+   /* verde menta       */
+   --color-cor-11: #f18a9e;
+   /* rosa (alias cor-6)*/
 
-    /* ── Atalhos semanticos ──────────────────────────────────────────────
+   /* ── Atalhos semanticos ──────────────────────────────────────────────
        Uso: text-brand, bg-topbar ...
     ────────────────────────────────────────────────────────────────── */
-    --color-brand:     #380252; /* cor-3 – destaque principal */
-    --color-primary:   #8b3d97; /* cor-2 – cor primaria       */
-    --color-secondary: #e2a2ff; /* cor-1 – cor secundaria     */
+   --color-brand: #380252;
+   /* cor-3 – destaque principal */
+   --color-primary: #ee977c;
+   /* cor-2 – cor primaria       */
+   --color-secondary: #e2a2ff;
+   /* cor-1 – cor secundaria     */
 
-    /* ── Escala violet (roxa) ────────────────────────────────────────────
+   /* ── Escala violet (roxa) ────────────────────────────────────────────
        Uso: text-violet-50 ... text-violet-950
        (baseada na escala visivel na imagem, culminando em #380252 no 950)
     ────────────────────────────────────────────────────────────────── */
-    --color-violet-50:  #F8F5FF;
-    --color-violet-100: #F5E7FF;
-    --color-violet-200: #E0D3FF;
-    --color-violet-300: #C884D8;
-    --color-violet-400: #B95FCC;
-    --color-violet-500: #9B40BF;
-    --color-violet-600: #8B3D97;
-    --color-violet-700: #6D2480;
-    --color-violet-800: #4F1066;
-    --color-violet-900: #3E074F;
-    --color-violet-950: #380252;
+   --color-violet-50: #F8F5FF;
+   --color-violet-100: #F5E7FF;
+   --color-violet-200: #E0D3FF;
+   --color-violet-300: #C884D8;
+   --color-violet-400: #B95FCC;
+   --color-violet-500: #9B40BF;
+   --color-violet-600: #8B3D97;
+   --color-violet-700: #6D2480;
+   --color-violet-800: #4F1066;
+   --color-violet-900: #3E074F;
+   --color-violet-950: #380252;
 
-    /* ── Escala rose (rosa/vermelho) ─────────────────────────────────────
+   /* ── Escala rose (rosa/vermelho) ─────────────────────────────────────
        Uso: text-rose-50 ... text-rose-950
     ────────────────────────────────────────────────────────────────── */
-    --color-rose-50:  #FFF2F5;
-    --color-rose-100: #FFE6EC;
-    --color-rose-200: #FAD1D8;
-    --color-rose-300: #F5AAB8;
-    --color-rose-400: #F18A9E;
-    --color-rose-500: #E54F6F;
-    --color-rose-600: #D1284A;
-    --color-rose-700: #B0204A;
-    --color-rose-800: #931844;
-    --color-rose-900: #7A1840;
-    --color-rose-950: #440B1F;
+   --color-rose-50: #FFF2F5;
+   --color-rose-100: #FFE6EC;
+   --color-rose-200: #FAD1D8;
+   --color-rose-300: #F5AAB8;
+   --color-rose-400: #F18A9E;
+   --color-rose-500: #E54F6F;
+   --color-rose-600: #D1284A;
+   --color-rose-700: #B0204A;
+   --color-rose-800: #931844;
+   --color-rose-900: #7A1840;
+   --color-rose-950: #440B1F;
 
-    /* ── Escala amber (laranja/amarelo) ──────────────────────────────────
+   /* ── Escala amber (laranja/amarelo) ──────────────────────────────────
        Uso: text-amber-50 ... text-amber-950
     ────────────────────────────────────────────────────────────────── */
-    --color-amber-50:  #FFFAEB;
-    --color-amber-100: #FFF3C4;
-    --color-amber-200: #FFE2A2;
-    --color-amber-300: #FFC04A;
-    --color-amber-400: #FFA820;
-    --color-amber-500: #F96607;
-    --color-amber-600: #DD5F02;
-    --color-amber-700: #B73F0C;
-    --color-amber-800: #94300C;
-    --color-amber-900: #7A2800;
-    --color-amber-950: #461202;
+   --color-amber-50: #FFFAEB;
+   --color-amber-100: #FFF3C4;
+   --color-amber-200: #FFE2A2;
+   --color-amber-300: #FFC04A;
+   --color-amber-400: #FFA820;
+   --color-amber-500: #F96607;
+   --color-amber-600: #DD5F02;
+   --color-amber-700: #B73F0C;
+   --color-amber-800: #94300C;
+   --color-amber-900: #7A2800;
+   --color-amber-950: #461202;
 }
 
-html, body, #app {
-    height: 100%;
-    margin: 0;
-    background-color: #f0f0f0;
-    font-family: 'Inter', sans-serif;
+html,
+body,
+#app {
+   height: 100%;
+   margin: 0;
+   background-color: #f0f0f0;
+   font-family: 'Inter', sans-serif;
 }

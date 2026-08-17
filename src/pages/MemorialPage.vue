@@ -7,13 +7,7 @@
     <div class="min-h-screen flex flex-col" style="background-color: #F0F0F0;">
 
         <!-- ── Hero ────────────────────────────────────────────────── -->
-        <div ref="heroRef" class="relative w-full bg-[#380252] overflow-hidden">
-
-            <!-- Overlay radial sutil -->
-            <div
-                class="absolute inset-0 pointer-events-none"
-                style="background: radial-gradient(ellipse at 65% 40%, rgba(79,10,112,0.55) 0%, transparent 65%)"
-            />
+        <div ref="heroRef" class="relative w-full bg-[#ee977c] overflow-hidden">
 
             <!-- Conteúdo do hero -->
             <div class="relative z-10 text-center px-6 pt-24 pb-16">
@@ -110,7 +104,7 @@
         <!-- ══════════════════════════════════════════════════════
              Footer
         ══════════════════════════════════════════════════════ -->
-        <footer class="bg-[#380252] text-white">
+        <footer class="bg-[#ee977c] text-white">
 
             <!-- Onda de separação -->
             <div class="w-full leading-[0]">
@@ -132,7 +126,7 @@
 
                     <!-- Col 1 — Sobre -->
                     <div>
-                        <h3 class="font-display text-xl text-cor-7 mb-3">Lab. Pesquisa de Gênero</h3>
+                        <h3 class="font-display text-xl text-white mb-3">Laboratório de Pesquisa em Violências Domésticas, Feminicídio e Transfeminicídio</h3>
                         <p class="font-sans text-sm text-white/65 leading-relaxed">
                             Laboratório interdisciplinar dedicado ao estudo e combate
                             à violência de gênero no estado de Sergipe.
@@ -226,9 +220,9 @@ const { setHero }  = usePageHero();
 let   heroObserver = null;
 
 onMounted(() => {
-    setHero(true, '#380252');
+    setHero(true, '#ee977c');
     heroObserver = new IntersectionObserver(
-        ([entry]) => setHero(entry.isIntersecting, '#380252'),
+        ([entry]) => setHero(entry.isIntersecting, '#ee977c'),
         { threshold: 0, rootMargin: '-56px 0px 0px 0px' }
     );
     if (heroRef.value) heroObserver.observe(heroRef.value);

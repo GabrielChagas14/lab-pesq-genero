@@ -1,10 +1,5 @@
 <template>
-    <div ref="heroRef" class="relative w-full bg-[#380252] overflow-hidden">
-
-        <div
-            class="absolute inset-0 pointer-events-none"
-            style="background: radial-gradient(ellipse at 65% 40%, rgba(79,10,112,0.55) 0%, transparent 65%)"
-        />
+    <div ref="heroRef" class="relative w-full bg-[#ee977c] overflow-hidden">
 
         <div class="relative z-10 px-6 pt-24 pb-20">
 
@@ -199,9 +194,9 @@ const { setHero } = usePageHero();
 let heroObserver  = null;
 
 onMounted(() => {
-    setHero(true, '#380252');
+    setHero(true, '#ee977c');
     heroObserver = new IntersectionObserver(
-        ([entry]) => setHero(entry.isIntersecting, '#380252'),
+        ([entry]) => setHero(entry.isIntersecting, '#ee977c'),
         { threshold: 0, rootMargin: '-56px 0px 0px 0px' }
     );
     if (heroRef.value) heroObserver.observe(heroRef.value);

@@ -6,13 +6,7 @@
          O TopBar é transparente sobre o hero e muda para sólido
          quando o hero sai da viewport (detectado pelo IntersectionObserver).
     ══════════════════════════════════════════════════════ -->
-    <div ref="heroRef" class="relative w-full bg-[#380252] overflow-hidden">
-
-        <!-- Overlay de profundidade (gradiente radial sutil) -->
-        <div
-            class="absolute inset-0 pointer-events-none"
-            style="background: radial-gradient(ellipse at 65% 40%, rgba(79,10,112,0.55) 0%, transparent 65%)"
-        />
+    <div ref="heroRef" class="relative w-full bg-[#ee977c] overflow-hidden">
 
         <!-- Conteúdo: pt-14 para ficar abaixo do TopBar fixed -->
         <div class="relative z-10 text-center px-6 pt-24 pb-20">
@@ -150,9 +144,9 @@ const { setHero }    = usePageHero();
 let   heroObserver   = null;
 
 onMounted(() => {
-    setHero(true, '#380252');
+    setHero(true, '#ee977c');
     heroObserver = new IntersectionObserver(
-        ([entry]) => setHero(entry.isIntersecting, '#380252'),
+        ([entry]) => setHero(entry.isIntersecting, '#ee977c'),
         { threshold: 0, rootMargin: '-56px 0px 0px 0px' }
     );
     if (heroRef.value) heroObserver.observe(heroRef.value);

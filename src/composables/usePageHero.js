@@ -9,7 +9,7 @@ import { ref } from 'vue';
  *
  * Uso na PÁGINA:
  *   const { setHero } = usePageHero()
- *   onMounted(() => setHero(true, '#380252'))
+ *   onMounted(() => setHero(true, '#FFC349'))
  *   onUnmounted(() => setHero(false))
  *
  * Uso no APP:
@@ -18,10 +18,10 @@ import { ref } from 'vue';
 
 // Estado module-level (singleton) para comunicação entre componentes
 const isHeroActive = ref(false);
-const heroBgColor  = ref('#380252');
+const heroBgColor  = ref('#ee977c');
 
 export function usePageHero() {
-    function setHero(active, color = '#380252') {
+    function setHero(active, color = '#ee977c') {
         isHeroActive.value = active;
         heroBgColor.value  = color;
     }
