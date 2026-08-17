@@ -54,7 +54,7 @@
                     <!-- Rótulo do ano -->
                     <div
                         :class="[
-                            'year-label font-display text-3xl font-bold text-[#380252]',
+                            'year-label font-display text-3xl font-bold text-[#ee977c]',
                             gi % 2 === 0 ? 'year-left' : 'year-right',
                         ]"
                     >
@@ -72,8 +72,14 @@
                             <article
                                 :class="['memorial-card', (vi + gi) % 2 === 0 ? 'card-left' : 'card-right']"
                             >
-                                <!-- Foto placeholder — cor sólida -->
-                                <div class="card-photo" />
+                                <!-- Foto da vítima ou placeholder -->
+                                <img
+                                    v-if="resolverFoto(vitima.imagem)"
+                                    :src="resolverFoto(vitima.imagem)"
+                                    :alt="`Foto de ${vitima.nome}`"
+                                    class="card-photo card-photo--img"
+                                />
+                                <div v-else class="card-photo" />
 
                                 <!-- Conteúdo -->
                                 <div class="card-body">
@@ -126,8 +132,8 @@
 
                     <!-- Col 1 — Sobre -->
                     <div>
-                        <h3 class="font-display text-xl text-white mb-3">Laboratório de Pesquisa em Violências Domésticas, Feminicídio e Transfeminicídio</h3>
-                        <p class="font-sans text-sm text-white/65 leading-relaxed">
+                        <h3 class="font-display text-2xl text-white mb-3">Laboratório de Pesquisa em Violências Domésticas, Feminicídio e Transfeminicídio</h3>
+                        <p class="font-sans text-base text-white/85 leading-relaxed">
                             Laboratório interdisciplinar dedicado ao estudo e combate
                             à violência de gênero no estado de Sergipe.
                         </p>
@@ -135,17 +141,17 @@
 
                     <!-- Col 2 — Navegação -->
                     <div>
-                        <h4 class="font-sans text-[10px] uppercase tracking-widest text-white/40 font-semibold mb-4">
+                        <h4 class="font-sans text-xs uppercase tracking-widest text-white/60 font-semibold mb-4">
                             Navegação
                         </h4>
                         <ul class="flex flex-col gap-2.5">
                             <li v-for="link in navLinks" :key="link.route">
                                 <router-link
                                     :to="link.route"
-                                    class="font-sans text-sm text-white/70 hover:text-cor-7
+                                    class="font-sans text-base text-white/85 hover:text-white
                                            transition-colors duration-200 flex items-center gap-2"
                                 >
-                                    <i :class="[link.icon, 'text-[10px] text-white/30']" />
+                                    <i :class="[link.icon, 'text-sm text-white/50']" />
                                     {{ link.label }}
                                 </router-link>
                             </li>
@@ -154,7 +160,7 @@
 
                     <!-- Col 3 — Redes Sociais -->
                     <div>
-                        <h4 class="font-sans text-[10px] uppercase tracking-widest text-white/40 font-semibold mb-4">
+                        <h4 class="font-sans text-xs uppercase tracking-widest text-white/60 font-semibold mb-4">
                             Redes Sociais
                         </h4>
                         <div class="flex gap-3 flex-wrap">
@@ -171,7 +177,7 @@
                                        transition-all duration-200 group"
                             >
                                 <i :class="[social.icon,
-                                    'text-white/70 group-hover:text-cor-7 text-base transition-colors duration-200']" />
+                                    'text-white/85 group-hover:text-white text-lg transition-colors duration-200']" />
                             </a>
                         </div>
                     </div>
@@ -181,7 +187,7 @@
                 <!-- Divider + apoio institucional -->
                 <div class="border-t border-white/10 pt-8">
 
-                    <p class="font-sans text-[10px] uppercase tracking-widest text-white/30 font-semibold mb-6 text-center">
+                    <p class="font-sans text-xs uppercase tracking-widest text-white/60 font-semibold mb-6 text-center">
                         Apoio Institucional
                     </p>
 
@@ -189,16 +195,16 @@
                         <img
                             src="@/assets/images/cnpq.png"
                             alt="CNPq — Conselho Nacional de Desenvolvimento Científico e Tecnológico"
-                            class="h-10 object-contain opacity-75 hover:opacity-100 transition-opacity duration-200"
+                            class="h-14 object-contain opacity-80 hover:opacity-100 transition-opacity duration-200"
                         />
                         <img
                             src="@/assets/images/lab pesquisa.png"
                             alt="Laboratório de Pesquisa de Gênero"
-                            class="h-10 object-contain opacity-75 hover:opacity-100 transition-opacity duration-200"
+                            class="h-20 object-contain opacity-80 hover:opacity-100 transition-opacity duration-200"
                         />
                     </div>
 
-                    <p class="font-sans text-xs text-white/30 text-center">
+                    <p class="font-sans text-sm text-white/70 text-center">
                         © {{ new Date().getFullYear() }} Laboratório de Pesquisa de Gênero — PIBITI/CNPq.
                         Todos os direitos reservados.
                     </p>
@@ -212,6 +218,27 @@
 
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue';
+
+// ── Importação dinâmica de todas as fotos de vítimas ──────────────────────────
+const fotosModules = import.meta.glob(
+    '@/assets/images/vitimas/*',
+    { eager: true }
+);
+
+// Cria mapa: { "FlaviaBarros": "/caminho/hash.png", ... }
+const fotosMap = Object.fromEntries(
+    Object.entries(fotosModules).map(([path, mod]) => {
+        const nomeComExt = path.split('/').pop();
+        const nomeSemExt = nomeComExt.replace(/\.[^.]+$/, '');
+        return [nomeSemExt, mod.default ?? mod];
+    })
+);
+
+/** Retorna URL da foto ou null se não cadastrada */
+function resolverFoto(imagem) {
+    if (!imagem) return null;
+    return fotosMap[imagem] ?? null;
+}
 import { usePageHero } from '@/composables/usePageHero.js';
 
 // ── Hero scroll detection ──────────────────────────────────────────────────
@@ -254,19 +281,17 @@ const LOREM = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do e
 
 const vitimas = [
     {
-        ano: 2025,
+        ano: 2026,
         lista: [
-            { id: 1,  nome: 'Nome 1', idade: 34, descricao: LOREM },
-            { id: 2,  nome: 'Nome 2', idade: 27, descricao: LOREM },
-            { id: 3,  nome: 'Nome 3', idade: 41, descricao: LOREM },
-            { id: 4,  nome: 'Nome 4', idade: 23, descricao: LOREM },
-            { id: 5,  nome: 'Nome 5', idade: 38, descricao: LOREM },
+            { id: 1,  nome: 'Flávia Barros', idade: 38, descricao: "Flávia era empresária e foi assassinada a tiros pelo seu companheiro em Aracaju.", imagem: "FlaviaBarros" },
+            { id: 2,  nome: 'Eliene Amaro', idade: 37, descricao: "Eliene era marisqueira e foi assassinada na frente dos seus três filhos pelo ex-companheiro em Pirunga.", imagem: "ElieneAmaro" },
+            { id: 3,  nome: 'Angela Maria', idade: 64, descricao: "Angela foi morta pelo seu ex-companheiro em Propriá" },
         ],
     },
     {
-        ano: 2024,
+        ano: 2025,
         lista: [
-            { id: 6,  nome: 'Nome 1', idade: 29, descricao: LOREM },
+            { id: 4,  nome: 'Yasmin Souza', idade: 23, descricao: "Yasmin foi morta após uma briga de casal na casa do pai da vítima em Aracaju pelo seu companheiro." },
             { id: 7,  nome: 'Nome 2', idade: 45, descricao: LOREM },
             { id: 8,  nome: 'Nome 3', idade: 31, descricao: LOREM },
             { id: 9,  nome: 'Nome 4', idade: 22, descricao: LOREM },
@@ -334,11 +359,11 @@ const vitimas = [
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    box-shadow: 0 2px 12px rgba(56, 2, 82, 0.08);
+    box-shadow: 0 2px 12px rgba(238, 151, 124, 0.15);
     transition: box-shadow 0.2s ease, transform 0.2s ease;
 }
 .memorial-card:hover {
-    box-shadow: 0 6px 24px rgba(56, 2, 82, 0.15);
+    box-shadow: 0 6px 24px rgba(238, 151, 124, 0.30);
     transform: translateY(-2px);
 }
 
@@ -351,7 +376,14 @@ const vitimas = [
     width: 100%;
     flex: 1 1 0;                 /* ocupa o espaço restante do card quadrado */
     min-height: 0;
-    background-color: #d8c4e8;   /* roxo clarinho — cor sólida */
+    background-color: #d8c4e8;   /* roxo clarinho — fallback */
+}
+
+/* Quando há imagem real */
+.card-photo--img {
+    object-fit: cover;
+    object-position: top center;
+    display: block;
 }
 
 /* ── Corpo do card ────────────────────────────────────────────────────────── */
@@ -371,7 +403,7 @@ const vitimas = [
     font-family: var(--font-display, serif);
     font-size: 0.95rem;
     font-weight: 600;
-    color: #380252;
+    color: #ee977c;
     line-height: 1.3;
 }
 
@@ -381,7 +413,7 @@ const vitimas = [
     font-size: 0.7rem;
     font-weight: 500;
     color: #ffffff;
-    background: rgba(56, 2, 82, 0.65);
+    background: rgba(238, 151, 124, 0.85);
     border-radius: 99px;
     padding: 2px 9px;
     margin-top: 2px;
@@ -423,14 +455,14 @@ const vitimas = [
     left: 24%;
     width: 52%;
     height: 100%;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25'%3E%3Cline x1='0%25' y1='0%25' x2='100%25' y2='100%25' stroke='%23380252' stroke-opacity='0.35' stroke-width='2' stroke-dasharray='6 5' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25'%3E%3Cline x1='0%25' y1='0%25' x2='100%25' y2='100%25' stroke='%23ee977c' stroke-opacity='0.50' stroke-width='2' stroke-dasharray='6 5' stroke-linecap='round'/%3E%3C/svg%3E");
     background-size: 100% 100%;
     background-repeat: no-repeat;
 }
 
 /* Conector direita→esquerda: linha vai de cima-direita para baixo-esquerda */
 .connector-to-left::before {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25'%3E%3Cline x1='100%25' y1='0%25' x2='0%25' y2='100%25' stroke='%23380252' stroke-opacity='0.35' stroke-width='2' stroke-dasharray='6 5' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25'%3E%3Cline x1='100%25' y1='0%25' x2='0%25' y2='100%25' stroke='%23ee977c' stroke-opacity='0.50' stroke-width='2' stroke-dasharray='6 5' stroke-linecap='round'/%3E%3C/svg%3E");
 }
 </style>
 
