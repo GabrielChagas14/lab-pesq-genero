@@ -6,6 +6,7 @@
         ──────────────────────────────────────────────────────
         color   : 'purple' | 'lilac' | 'green' | 'red'
         variant : 'solid' | 'outlined' | 'dotted'
+        shape   : 'default' | 'chip'
         label   : String  (texto do botão)
         icon    : String  (ícone PrimeIcons, ex: 'pi pi-check')
         disabled: Boolean
@@ -41,6 +42,16 @@ const props = defineProps({
         default: 'solid',
         validator: (v) => ['solid', 'outlined', 'dotted'].includes(v),
     },
+    /**
+     * Formato do botão.
+     * 'default' → retângulo arredondado (padrão)
+     * 'chip'    → pílula compacta (rounded-full, padding e fonte menores)
+     */
+    shape: {
+        type: String,
+        default: 'default',
+        validator: (v) => ['default', 'chip'].includes(v),
+    },
     label: {
         type: String,
         default: '',
@@ -63,10 +74,10 @@ const props = defineProps({
 //  Cada entrada expõe os tokens necessários para as três variantes.
 const colorMap = {
     purple: {
-        // #380252 – Roxo escuro (brand)
-        solid:    'bg-[#380252] text-white border border-[#380252] hover:bg-[#4f0a70] hover:border-[#4f0a70] active:bg-[#250139]',
-        outlined: 'bg-transparent text-[#380252] border border-[#380252] hover:bg-[#380252]/10 active:bg-[#380252]/20',
-        dotted:   'bg-transparent text-[#380252] border border-dashed border-[#380252] hover:bg-[#380252]/10 active:bg-[#380252]/20',
+        // #ee977c – Salmão (brand primary)
+        solid:    'bg-[#ee977c] text-white border border-[#ee977c] hover:bg-[#d4785a] hover:border-[#d4785a] active:bg-[#ba5f43]',
+        outlined: 'bg-transparent text-[#ee977c] border border-[#ee977c] hover:bg-[#ee977c]/10 active:bg-[#ee977c]/20',
+        dotted:   'bg-transparent text-[#ee977c] border border-dashed border-[#ee977c] hover:bg-[#ee977c]/10 active:bg-[#ee977c]/20',
     },
     lilac: {
         // #E0A0FD – Lilás claro
@@ -92,11 +103,13 @@ const colorMap = {
 const buttonClasses = computed(() => {
     const colorVariant = colorMap[props.color]?.[props.variant] ?? '';
 
+    const isChip = props.shape === 'chip';
+
     const base = [
         // Layout & tipografia
-        'inline-flex items-center justify-center gap-2',
-        'px-5 py-2.5 rounded-lg',
-        'font-sans font-medium text-sm tracking-wide',
+        'inline-flex items-center justify-center gap-1.5',
+        isChip ? 'px-3 py-1 rounded-full text-xs' : 'px-5 py-2.5 rounded-lg text-sm',
+        'font-sans font-medium tracking-wide',
         // Transições
         'transition-all duration-200 ease-in-out',
         // Cursor & foco
@@ -108,7 +121,7 @@ const buttonClasses = computed(() => {
 
     // Ring de foco por cor
     const ringMap = {
-        purple: 'focus-visible:ring-[#380252]',
+        purple: 'focus-visible:ring-[#ee977c]',
         lilac:  'focus-visible:ring-[#E0A0FD]',
         green:  'focus-visible:ring-[#009D46]',
         red:    'focus-visible:ring-[#BA1A1A]',

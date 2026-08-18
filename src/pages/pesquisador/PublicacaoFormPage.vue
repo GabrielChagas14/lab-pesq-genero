@@ -174,15 +174,11 @@ const tiposOptions = [
 ];
 
 const categoriasOptions = [
-    { label: 'Comunicação',          value: 'Comunicação'          },
-    { label: 'Dados & Estatísticas', value: 'Dados & Estatísticas' },
-    { label: 'Teoria Feminista',     value: 'Teoria Feminista'     },
-    { label: 'Ciência & Tecnologia', value: 'Ciência & Tecnologia' },
-    { label: 'Diversidade',          value: 'Diversidade'          },
-    { label: 'Economia',             value: 'Economia'             },
-    { label: 'Cultura',              value: 'Cultura'              },
-    { label: 'Saúde',                value: 'Saúde'                },
-    { label: 'Direito',              value: 'Direito'              },
+    { label: 'Feminicídio',          value: 'Feminicídio'          },
+    { label: 'Transfeminicídio',     value: 'Transfeminicídio'     },
+    { label: 'Violência de Gênero',  value: 'Violência de Gênero'  },
+    { label: 'Masculinidade',        value: 'Masculinidade'        },
+    { label: 'Crimes do Patriarcado', value: 'Crimes do Patriarcado' },
 ];
 
 // ── Validação ─────────────────────────────────────────────────────────────

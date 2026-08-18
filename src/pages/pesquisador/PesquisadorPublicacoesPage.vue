@@ -29,7 +29,7 @@
         <div class="max-w-6xl mx-auto px-6 py-6">
 
             <!-- Busca rápida -->
-            <div class="flex flex-col sm:flex-row gap-3 mb-5 items-start sm:items-center">
+            <div class="flex flex-col sm:flex-row gap-3 mb-4 items-start sm:items-center">
                 <div class="relative flex-1 max-w-sm">
                     <BaseInput
                         v-model="busca"
@@ -40,6 +40,26 @@
                 <p class="flex items-center text-xs text-gray-500 font-sans">
                     {{ listaFiltrada.length }} publicaç{{ listaFiltrada.length === 1 ? 'ão' : 'ões' }}
                 </p>
+            </div>
+
+            <!-- Filtro por categoria -->
+            <div class="flex gap-2 flex-wrap mb-5">
+                <BaseButton
+                    label="Todas"
+                    shape="chip"
+                    color="purple"
+                    :variant="categoriaSelecionada === null ? 'solid' : 'outlined'"
+                    @click="categoriaSelecionada = null"
+                />
+                <BaseButton
+                    v-for="cat in CATEGORIAS"
+                    :key="cat"
+                    :label="cat"
+                    shape="chip"
+                    color="purple"
+                    :variant="categoriaSelecionada === cat ? 'solid' : 'outlined'"
+                    @click="categoriaSelecionada = cat"
+                />
             </div>
 
             <!-- Estado vazio -->
@@ -191,17 +211,32 @@ const router                       = useRouter();
 const { publicacoes, remover }     = usePesquisadorPublicacoes();
 const toast                        = useToast();
 
-// ── Busca ──────────────────────────────────────────────────────────────────
-const busca = ref('');
+// ── Categorias possíveis ──────────────────────────────────────────────────
+const CATEGORIAS = [
+    'Feminicídio',
+    'Transfeminicídio',
+    'Violência de Gênero',
+    'Masculinidade',
+    'Crimes do Patriarcado',
+];
+
+// ── Busca e filtro ─────────────────────────────────────────────────────────
+const busca               = ref('');
+const categoriaSelecionada = ref(null);
+
 const listaFiltrada = computed(() => {
     const q = busca.value.trim().toLowerCase();
-    if (!q) return publicacoes.value;
-    return publicacoes.value.filter(
-        (p) =>
+    return publicacoes.value.filter((p) => {
+        const matchBusca =
+            !q ||
             p.titulo.toLowerCase().includes(q) ||
             p.categoria?.toLowerCase().includes(q) ||
-            p.tipo.toLowerCase().includes(q)
-    );
+            p.tipo.toLowerCase().includes(q);
+        const matchCategoria =
+            !categoriaSelecionada.value ||
+            p.categoria === categoriaSelecionada.value;
+        return matchBusca && matchCategoria;
+    });
 });
 
 

@@ -6,6 +6,7 @@ import router from './router/index.js';
 import PrimeVue      from 'primevue/config';
 import ToastService  from 'primevue/toastservice';
 import Aura from '@primeuix/themes/aura';
+import '@/plugins/echarts.js'; // registra componentes base do ECharts (tree-shaking)
 
 const app = createApp(App);
 

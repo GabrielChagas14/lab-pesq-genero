@@ -18,7 +18,7 @@ A pesquisa também identificou que a linguagem utilizada para descrever lideran�
 
 Conclui-se que as redações brasileiras precisam adotar protocolos deliberados de inclusão de vozes femininas como especialistas em todas as áreas do jornalismo político, rompendo com a reprodução inconsciente de estruturas patriarcais que moldam o espaço público informativo.`,
         data_publicacao: '2025-03-15',
-        categoria: 'Comunicação',
+        categoria: 'Violência de Gênero',
     },
     {
         id: 2,
@@ -34,7 +34,7 @@ O cruzamento com indicadores de IDH municipal revelou correlação negativa sign
 
 As recomendações incluem expansão emergencial de delegacias especializadas nas regiões de maior vulnerabilidade, criação de plantões noturnos nos centros de referência e implementação de protocolos de avaliação de risco padronizados.`,
         data_publicacao: '2025-06-01',
-        categoria: 'Dados & Estatísticas',
+        categoria: 'Violência de Gênero',
     },
     {
         id: 3,
@@ -48,7 +48,7 @@ A palestrante parte do conceito seminal de Kimberlé Crenshaw para demonstrar co
 
 A segunda parte da apresentação discute metodologias interseccionais de pesquisa e ativismo, com ênfase em abordagens participativas que incluem as próprias comunidades afetadas como produtoras de conhecimento. A palestrante apresenta experiências de pesquisa-ação desenvolvidas em parceria com coletivos periféricos de Salvador e Belém.`,
         data_publicacao: '2025-04-20',
-        categoria: 'Teoria Feminista',
+        categoria: 'Violência de Gênero',
     },
     {
         id: 4,
@@ -62,7 +62,7 @@ Cada episódio segue um formato de entrevista aprofundada, com duração média 
 
 Destaques da temporada incluem as histórias de uma astrofísica da UFRJ que foi a primeira mulher negra a defender doutorado em seu departamento, de uma engenheira química que criou um grupo de mentoria para alunas de graduação, e de uma bióloga marinha que conciliou gravidez e pós-doutorado em condições adversas.`,
         data_publicacao: '2025-07-10',
-        categoria: 'Ciência & Tecnologia',
+        categoria: 'Violência de Gênero',
     },
     {
         id: 5,
@@ -76,7 +76,7 @@ A base inclui variáveis como tipo de violência (física, psicológica, sexual,
 
 A documentação completa do processo de obtenção e tratamento dos dados está disponível no arquivo README do repositório. Contribuições da comunidade para correção e enriquecimento da base são bem-vindas por meio de pull requests.`,
         data_publicacao: '2025-05-05',
-        categoria: 'Dados & Estatísticas',
+        categoria: 'Feminicídio',
     },
     {
         id: 6,
@@ -92,7 +92,7 @@ Apesar da existência de Núcleos de Diversidade em 71% das instituições pesqu
 
 As recomendações incluem o uso do nome social em todos os registros acadêmicos, treinamento obrigatório de docentes e técnicos em diversidade, criação de banheiros neutros e programas de bolsas específicos para estudantes LGBTQIA+ em situação de vulnerabilidade.`,
         data_publicacao: '2025-02-28',
-        categoria: 'Diversidade',
+        categoria: 'Violência de Gênero',
     },
     {
         id: 7,
@@ -108,7 +108,7 @@ A segregação ocupacional horizontal — concentração de mulheres em determin
 
 A pandemia de COVID-19 aprofundou temporariamente as desigualdades, com taxas de desemprego feminino chegando a 20% em 2021, contra 14% masculino — efeito relacionado à concentração de mulheres em setores de serviços mais impactados e ao aumento desproporcionado das responsabilidades de cuidado.`,
         data_publicacao: '2025-01-18',
-        categoria: 'Economia',
+        categoria: 'Crimes do Patriarcado',
     },
     {
         id: 8,
@@ -124,7 +124,7 @@ A narrativa também evidencia as estruturas de poder que dificultam o acesso das
 
 O documentário foi exibido em doze festivais de cinema ambiental e direitos humanos e recebeu o prêmio de Melhor Documentário Curto no Festival Mulheres em Foco 2025. Está disponível gratuitamente na plataforma do laboratório.`,
         data_publicacao: '2025-08-01',
-        categoria: 'Cultura',
+        categoria: 'Crimes do Patriarcado',
     },
     {
         id: 9,
@@ -138,7 +138,7 @@ A conversa aborda como estruturas sociais de dominação se inscrevem no psiquis
 
 O episódio também trata da escassez de profissionais de saúde mental com formação em gênero e sexualidade, das barreiras de acesso ao tratamento e das potencialidades das redes de cuidado mútuo como estratégia de resistência e promoção de saúde.`,
         data_publicacao: '2025-07-25',
-        categoria: 'Saúde',
+        categoria: 'Violência de Gênero',
     },
     {
         id: 10,
@@ -154,7 +154,7 @@ A análise identifica padrões nos processos de avanço e retrocesso: a mobiliza
 
 A pesquisa também discute os efeitos da pandemia sobre os serviços de saúde sexual e reprodutiva, documentando o agravamento das barreiras de acesso e o aumento de gestações não planejadas em contextos de lockdown sem garantia de serviços essenciais.`,
         data_publicacao: '2025-06-30',
-        categoria: 'Direito',
+        categoria: 'Crimes do Patriarcado',
     },
     {
         id: 11,
@@ -168,7 +168,7 @@ O portal permite filtrar as informações por região, tipo de violência (físi
 
 A plataforma integra também um guia de direitos para gestantes e parturientes, com linguagem acessível, e uma seção dedicada a profissionais de saúde com materiais formativos sobre parto humanizado e consentimento informado.`,
         data_publicacao: '2025-03-03',
-        categoria: 'Saúde',
+        categoria: 'Violência de Gênero',
     },
     {
         id: 12,
@@ -184,6 +184,6 @@ A segunda parte analisa fenômenos aparentemente contraditórios: de um lado, o 
 
 O ensaio conclui que a transformação das masculinidades é um campo de disputa central para o enfrentamento da violência de gênero, e que políticas públicas voltadas aos homens — como programas de prevenção e grupos reflexivos — são componentes necessários de uma estratégia abrangente.`,
         data_publicacao: '2025-04-11',
-        categoria: 'Teoria Feminista',
+        categoria: 'Masculinidade',
     },
 ];

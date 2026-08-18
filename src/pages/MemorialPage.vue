@@ -16,7 +16,7 @@
                     <br />
                     Em Sergipe
                 </h1>
-                <p class="mt-5 font-sans text-base text-white/70 max-w-xl mx-auto leading-relaxed">
+                <p class="mt-5 font-sans text-xl text-white max-w-xl mx-auto leading-relaxed">
                     Este memorial homenageia a vida e a memória das mulheres sergipanas
                     que tiveram suas vidas ceifadas pelo feminicídio.
                 </p>
@@ -205,9 +205,9 @@
                     </div>
 
                     <p class="font-sans text-sm text-white/70 text-center">
-                        © {{ new Date().getFullYear() }} Laboratório de Pesquisa de Gênero — PIBITI/CNPq.
-                        Todos os direitos reservados.
-                    </p>
+                    © {{ new Date().getFullYear() }} Laboratório de Pesquisa em Violências Domésticas, Feminicídio e Transfeminicídio — UFS.
+                    Todos os direitos reservados.
+                </p>
                 </div>
 
             </div>
